@@ -19,6 +19,8 @@ Show language flags at "My sites" list in WordPress admin bar. Handy with multis
 
 Plugin uses [GoSquared's Flag Icon Set](https://github.com/gosquared/flags) ([MIT License](https://github.com/gosquared/flags/blob/master/LICENSE.txt)). Hooray for them!
 
+Plugin source code at [WordPress repository](http://wordpress.org/extend/plugins/admin-bar-languages/) and at [GitHub](https://github.com/simison/WP-admin-bar-languages).
+
 == Installation ==
 
 1. Unzip plugin and upload `admin-bar-blog-languages` folder to the `/wp-content/plugins/` directory
