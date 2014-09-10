@@ -1,0 +1,25 @@
+#wpadminbar .quicklinks li .blavatar.flagatar:before {
+    content: '';
+}
+
+#wpadminbar .quicklinks li .blavatar.flagatar {
+    background-position: 0 bottom;
+    background-repeat: no-repeat;
+    -webkit-background-size: 16px 16px;
+       -moz-background-size: 16px 16px;
+         -o-background-size: 16px 16px;
+            background-size: 16px 16px;
+}
+
+/* Make sure we have flags visible on mobile */
+@media screen and (max-width: 782px) {
+    #wpadminbar .quicklinks li .blavatar.flagatar:before {
+        display: inline-block;
+    }
+}
+
+
+/* Currently active blog */
+#wpadminbar .quicklinks .menupop ul li .current {
+    font-weight: 600;
+}
