@@ -21,10 +21,13 @@ Yes! It's tested down to 3.6.
 
 ### Changelog
 
+#### 1.1
+2014-10-20
+* Transform plugin code into a Class to make sure we have WP's core functionality loaded before this plugin.
+
 #### 1.0
 2014-09-10
 * Yay, first version!
-
 
 ### License
 [GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)

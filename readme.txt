@@ -2,9 +2,9 @@
 Contributors: simison
 Donate link: http://www.mikaelkorpela.fi/volunteering/
 Tags: admin, i18n, l10n, localization, admin bar, adminbar, toolbar, menu, my sites, network, multi-site, multisite, MU, flags, flag, icon, icons
-Requires at least: 4.0
+Requires at least: 3.6
 Tested up to: 4.0
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,7 +42,10 @@ Yes! It's tested down to 3.6.
 
 == Changelog ==
 
+= 1.1 =
+2014-10-20
+* Transform plugin code into a Class to make sure we have WP's core functionality loaded before this plugin.
+
 = 1.0 =
 2014-09-10
 * Yay, first version!
-
