@@ -3,7 +3,7 @@
  Plugin Name: Admin bar languages
  Plugin URI: http://wordpress.org/extend/plugins/admin-bar-languages/
  Description: Show flags at "My sites" list in WordPress admin bar.
- Version: 1.0
+ Version: 1.1
  Author: Mikael Korpela
  Author URI: http://www.mikaelkorpela.fi
  License: GPL2
@@ -28,15 +28,39 @@
 defined('ABSPATH') or die("No script kiddies please!");
 
 
-/*
- * Run this plugin only when we have admin bar up there...
- */
-if( is_admin_bar_showing() ) {
+class AdminBarLanguages {
+    public function __construct()
+    {
+        add_action( 'init', array($this, 'init_admin_bar_languages') );
+    }
+
+    /*
+     * Run this plugin only when we have admin bar up there...
+     */
+    public function init_admin_bar_languages(){
+        if( is_user_logged_in() && is_admin_bar_showing() ) {
+            add_action( 'wp_before_admin_bar_render', array($this, 'flagatar_admin_bar') );
+            add_action( 'admin_enqueue_scripts', array($this, 'flagatar_style') );
+        }
+
+        if (is_admin()){
+            add_filter( 'plugin_row_meta', array($this, 'flagatar_plugin_links'), 10, 2 );
+        }
+    }
+
+
+    /*
+     * Include stylesheet for flags
+     */
+    public function flagatar_style() {
+        wp_enqueue_style('flagatar', plugins_url('flagatar.css', __FILE__));
+    }
+
 
     /*
      * Add those flags to My Sites -menu
      */
-    function flagatar_admin_bar() {
+    public function flagatar_admin_bar() {
         global $wp_admin_bar, $blog_id;
 
         // This is functionality for WP 4.0+ only
@@ -87,28 +111,16 @@ if( is_admin_bar_showing() ) {
             }
         }
     }
-    add_action( 'wp_before_admin_bar_render', 'flagatar_admin_bar' );
 
     /*
-     * Include stylesheet for flags
+     * Add donation link on the plugin listing
      */
-    function flagatar_style() {
-        wp_enqueue_style('flagatar', plugins_url('flagatar.css', __FILE__));
+    public function flagatar_plugin_links($links, $file) {
+       if ( $file == plugin_basename(dirname(__FILE__).'/admin-bar-languages.php') ) {
+         $links[] = '<a href="http://www.mikaelkorpela.fi/volunteering/">' . __('Donate') . '</a>';
+       }
+       return $links;
     }
-    add_action('admin_enqueue_scripts', 'flagatar_style');
-
-} //is_admin_bar_showing()
-
-
-/*
- * Add donation link on the plugin listing
- */
-if (is_admin()){
-    function flagatar_plugin_links($links, $file) {
-    	if ( $file == plugin_basename(dirname(__FILE__).'/admin-bar-languages.php') ) {
-    		$links[] = '<a href="http://www.mikaelkorpela.fi/volunteering/">' . __('Donate') . '</a>';
-    	}
-    	return $links;
-    }
-    add_filter('plugin_row_meta', 'flagatar_plugin_links', 10, 2);
 }
+
+$AdminBarLanguages = new AdminBarLanguages();
